@@ -11,13 +11,13 @@ import java.io.File;
 public class Application extends JFrame {
     private static final Configuration config = new Configuration(new File("config.txt"));
     private static final BCipher bCipher = new BCipher();
-    
-//    private final JPanel container;
     public Application() {
+        // Setting up application
         setTitle("Hide");
         setPreferredSize(new Dimension(600, 400));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        // Finalizing application
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
