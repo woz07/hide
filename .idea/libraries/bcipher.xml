@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bcipher">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/bcipher.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
