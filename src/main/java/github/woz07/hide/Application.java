@@ -1,5 +1,8 @@
 package github.woz07.hide;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import github.woz07.BCipher;
@@ -7,8 +10,12 @@ import github.woz07.liteconfig.Configuration;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Application extends JFrame {
     // File structure
@@ -30,27 +37,36 @@ public class Application extends JFrame {
         setPreferredSize(new Dimension(600, 400));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        // Setting up menu ~ m = menu, i = item
+        // Setting up menus ~ m = menu, i = item
+        // File menu
         JMenu mFile = new JMenu("File");
         JMenuItem iAddKeys = new JMenuItem("Add key(s)");
+        iAddKeys.addActionListener(hAddKeys());
         JMenuItem iRemoveKeys = new JMenuItem("Remove key(s)");
+        iRemoveKeys.addActionListener(hRemoveKeys());
         JMenuItem iViewKeys = new JMenuItem("View key(s)");
+        iViewKeys.addActionListener(hViewKeys());
         JMenuItem iMode = new JMenuItem("Mode");
+        iMode.addActionListener(hMode());
         JMenuItem iExit = new JMenuItem("Exit");
+        iExit.addActionListener(hExit());
         mFile.add(iAddKeys);
         mFile.add(iRemoveKeys);
         mFile.add(iViewKeys);
         mFile.add(iMode);
         mFile.add(iExit);
         
+        // Help menu
         JMenu mHelp = new JMenu("Help");
         JMenuItem iAbout = new JMenuItem("About");
+        iAbout.addActionListener(hAbout());
         JMenuItem iHelp = new JMenuItem("Help page");
+        iHelp.addActionListener(hHelp());
         JMenuItem iIssue = new JMenuItem("Found an issue?");
+        iIssue.addActionListener(hIssue());
         mHelp.add(iAbout);
         mHelp.add(iHelp);
         mHelp.add(iIssue);
-        
         
         // Finalizing menu
         menu = new JMenuBar();
@@ -107,12 +123,94 @@ public class Application extends JFrame {
         
         // Set mode
         if (config.get("MODE").equals("light")) {
-            FlatMacLightLaf.setup();
+            FlatLaf.setup(new FlatMacLightLaf());
         } else {
-            FlatMacDarkLaf.setup();
+            FlatLaf.setup(new FlatMacDarkLaf());
         }
-        
+    
         // Run application
         SwingUtilities.invokeLater(Application::new);
+    }
+    
+    // Listeners for JMenuItem(s)
+    // h = Handle
+    
+    // File menu listeners
+    
+    private ActionListener hAddKeys() {
+        return e -> {
+        
+        };
+    }
+    
+    private ActionListener hRemoveKeys() {
+        return e -> {
+        
+        };
+    }
+    
+    private ActionListener hViewKeys() {
+        return e -> {
+        
+        };
+    }
+    
+    private ActionListener hMode() {
+        return e -> {
+            // Get current mode and change it
+            if (config.get("MODE").equals("light")) {
+                config.updateValue("MODE", "dark");
+                FlatLaf.setup(new FlatMacDarkLaf());
+            } else {
+                config.updateValue("MODE", "light");
+                FlatLaf.setup(new FlatMacLightLaf());
+            }
+            SwingUtilities.updateComponentTreeUI(this);
+        };
+    }
+    
+    private ActionListener hExit() {
+        return e -> {
+            // Clean up and then close
+            bCipher.flush();
+            this.dispose();
+            System.exit(0);
+        };
+    }
+    
+    // Help menu listeners
+    
+    private ActionListener hAbout() {
+        return e -> {
+        
+        };
+    }
+    
+    private ActionListener hHelp() {
+        return e -> {
+            try {
+                URI uri = new URI("https://www.github.com/woz07/hide");
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    desktop.browse(uri);
+                }
+            } catch (URISyntaxException | IOException u) {
+                u.printStackTrace();
+            }
+        };
+    }
+    
+    private ActionListener hIssue() {
+        return e -> {
+            try {
+                URI uri = new URI("https://www.github.com/woz07/hide/issues");
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    desktop.browse(uri);
+                }
+            } catch (URISyntaxException | IOException u) {
+                u.printStackTrace();
+            }
+        };
     }
 }
