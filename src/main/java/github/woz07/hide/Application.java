@@ -23,10 +23,7 @@ public class Application extends JFrame {
     private static final Configuration config = new Configuration(fConfig);
     private static final BCipher bCipher = new BCipher();
     
-    private final JMenuBar menu;
-    
     private final JPanel container;
-    private final JScrollPane sPane;
     public Application() {
         
         // Setting up application
@@ -66,7 +63,7 @@ public class Application extends JFrame {
         mHelp.add(iIssue);
         
         // Finalizing menu
-        menu = new JMenuBar();
+        JMenuBar menu = new JMenuBar();
         menu.add(mFile);
         menu.add(mHelp);
         setJMenuBar(menu);
