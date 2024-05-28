@@ -35,12 +35,12 @@ public class Application extends JFrame {
         JMenuItem iAddKeys = new JMenuItem("Add key(s)");
         JMenuItem iRemoveKeys = new JMenuItem("Remove key(s)");
         JMenuItem iViewKeys = new JMenuItem("View key(s)");
-        JMenuItem iSetting = new JMenuItem("Setting");
+        JMenuItem iMode = new JMenuItem("Mode");
         JMenuItem iExit = new JMenuItem("Exit");
         mFile.add(iAddKeys);
         mFile.add(iRemoveKeys);
         mFile.add(iViewKeys);
-        mFile.add(iSetting);
+        mFile.add(iMode);
         mFile.add(iExit);
         
         JMenu mHelp = new JMenu("Help");
