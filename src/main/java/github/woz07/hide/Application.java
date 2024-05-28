@@ -189,7 +189,7 @@ public class Application extends JFrame {
     private ActionListener hHelp() {
         return e -> {
             try {
-                URI uri = new URI("https://www.github.com/woz07/hide");
+                URI uri = new URI("https://www.github.com/woz07/hide#help");
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     desktop.browse(uri);
