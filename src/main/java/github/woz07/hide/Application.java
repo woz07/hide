@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Application extends JFrame {
     // File structure
-    private static final File fRoot = new File(System.getProperty("APPDATA"), "Hide");
+    private static final File fRoot = new File(System.getenv("APPDATA"), "Hide");
     private static final File fConfig = new File(fRoot, "config.txt");
     
     // External libraries
