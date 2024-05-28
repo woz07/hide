@@ -24,6 +24,7 @@ public class Application extends JFrame {
     private static final BCipher bCipher = new BCipher();
     
     private final JPanel container;
+    private final GridBagConstraints gbc;
     public Application() {
         
         // Setting up application
@@ -69,11 +70,14 @@ public class Application extends JFrame {
         setJMenuBar(menu);
         
         // Setting up components
-        sPane = new JScrollPane();
-        
+        container = new JPanel(new GridBagLayout());
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 20, 20, 20);
         
         // Finalizing components
-        container = new JPanel(new GridLayout());
+        add(container, BorderLayout.CENTER);
         
         // Finalizing application
         pack();
