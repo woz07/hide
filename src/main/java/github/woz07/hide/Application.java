@@ -11,7 +11,14 @@ import github.woz07.liteconfig.Configuration;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -102,7 +109,6 @@ public class Application extends JFrame {
         // Submit
         bSubmit = new JButton("Cipher");
         bSubmit.addActionListener(hSubmit());
-        bSubmit.requestFocusInWindow();
         
         // Output
         tOutput = new JTextArea();
@@ -173,18 +179,19 @@ public class Application extends JFrame {
     
     // Listener for bSubmit
     // h = Handle
+    
     private ActionListener hSubmit() {
         return e -> {
             // Check if keys isn't empty
             if (keys == null) {
-                System.out.println("Keys mustn't be empty");
+                System.err.println("Keys mustn't be empty");
                 return;
             }
             // Set keys always
             try {
                 bCipher.setKey(keys);
             } catch (BCipherNullException | BCipherKeyException | BCipherSizeException ex) {
-                System.out.println("Unable to set keys.\nErr:" + ex.getMessage());
+                System.err.println("Unable to set keys.\nErr:" + ex.getMessage());
             }
             // Get text then convert and put it into output
             tOutput.setText(bCipher.cipher(tInput.getText()));
