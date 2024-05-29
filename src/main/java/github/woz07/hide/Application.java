@@ -4,6 +4,9 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import github.woz07.BCipher;
+import github.woz07.exceptions.BCipherKeyException;
+import github.woz07.exceptions.BCipherNullException;
+import github.woz07.exceptions.BCipherSizeException;
 import github.woz07.liteconfig.Configuration;
 
 import javax.swing.*;
@@ -23,8 +26,19 @@ public class Application extends JFrame {
     private static final Configuration config = new Configuration(fConfig);
     private static final BCipher bCipher = new BCipher();
     
+    // Keys
+    private byte[] keys = {0xA}; // for testing reasons this is set to 0xA
+    
     private final JPanel container;
     private final GridBagConstraints gbc;
+    // t = TextArea
+    // s = ScrollPane
+    // l = Label
+    private final JTextArea tInput;
+    private final JScrollPane sInputScroll;
+    private final JButton bSubmit;
+    private final JTextArea tOutput;
+    private final JScrollPane sOutputScroll;
     public Application() {
         
         // Setting up application
@@ -74,9 +88,36 @@ public class Application extends JFrame {
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        
+        // Input
+        tInput = new JTextArea();
+        tInput.setText("Enter text to cipher...");
+        tInput.setRows(10);
+        tInput.setColumns(40);
+        sInputScroll = new JScrollPane(tInput);
+        sInputScroll.setPreferredSize(new Dimension(500, 135));
+        
+        // Submit
+        bSubmit = new JButton("Cipher");
+        bSubmit.addActionListener(hSubmit());
+        bSubmit.requestFocusInWindow();
+        
+        // Output
+        tOutput = new JTextArea();
+        tOutput.setText("Ciphered text appears here...");
+        tOutput.setRows(10);
+        tOutput.setColumns(40);
+        sOutputScroll = new JScrollPane(tOutput);
+        sOutputScroll.setPreferredSize(new Dimension(500, 135));
         
         // Finalizing components
+        container.add(sInputScroll, gbc);
+        gbc.gridy++;
+        container.add(bSubmit, gbc);
+        gbc.gridy++;
+        container.add(sOutputScroll, gbc);
         add(container, BorderLayout.CENTER);
         
         // Finalizing application
@@ -130,6 +171,26 @@ public class Application extends JFrame {
         SwingUtilities.invokeLater(Application::new);
     }
     
+    // Listener for bSubmit
+    // h = Handle
+    private ActionListener hSubmit() {
+        return e -> {
+            // Check if keys isn't empty
+            if (keys == null) {
+                System.out.println("Keys mustn't be empty");
+                return;
+            }
+            // Set keys always
+            try {
+                bCipher.setKey(keys);
+            } catch (BCipherNullException | BCipherKeyException | BCipherSizeException ex) {
+                System.out.println("Unable to set keys.\nErr:" + ex.getMessage());
+            }
+            // Get text then convert and put it into output
+            tOutput.setText(bCipher.cipher(tInput.getText()));
+        };
+    }
+    
     // Listeners for JMenuItem(s)
     // h = Handle
     
@@ -137,19 +198,19 @@ public class Application extends JFrame {
     
     private ActionListener hAddKeys() {
         return e -> {
-        
+            System.out.println("Working on...");
         };
     }
     
     private ActionListener hRemoveKeys() {
         return e -> {
-        
+            System.out.println("Working on...");
         };
     }
     
     private ActionListener hViewKeys() {
         return e -> {
-        
+            System.out.println("Working on...");
         };
     }
     
@@ -180,14 +241,22 @@ public class Application extends JFrame {
     
     private ActionListener hAbout() {
         return e -> {
-        
+            try {
+                URI uri = new URI("https://www.github.com/woz07/hide#About");
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    desktop.browse(uri);
+                }
+            } catch (URISyntaxException | IOException u) {
+                u.printStackTrace();
+            }
         };
     }
     
     private ActionListener hHelp() {
         return e -> {
             try {
-                URI uri = new URI("https://www.github.com/woz07/hide#help");
+                URI uri = new URI("https://www.github.com/woz07/hide#Help");
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     desktop.browse(uri);

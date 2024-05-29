@@ -1,0 +1,16 @@
+V1
+[n]: Allow for ctrl + v into tInput
+[n]: Allow for ctrl + c on tOutput
+[n]: Work on WAddKeys, get it up and running
+[n]: Work on Application::hAddKeys()
+[n]: Work on WRemoveKeys, get it up and running
+[n]: Work on Application::hRemoveKeys()
+[n]: Work on WViewKeys, get it up and running
+[n]: Work on Application::hViewKeys()
+[n]: Display errors using a popup rather than output
+[n]: Aggressive testing
+
+V2
+To decide...
+Cool ideas:
+- A feature that lets you convert from an input file to an output file
