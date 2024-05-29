@@ -6,3 +6,5 @@ An application to cipher texts
 ## About
 
 ## Help
+
+## Deleting
