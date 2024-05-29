@@ -9,6 +9,7 @@ V1
 [n]: Work on Application::hViewKeys()
 [n]: Display errors using a popup rather than output
 [n]: Add a favicon
+[n]: Work on readme
 [n]: Aggressive testing
 
 V2
