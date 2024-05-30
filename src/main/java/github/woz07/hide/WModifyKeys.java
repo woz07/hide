@@ -99,15 +99,4 @@ public class WModifyKeys extends JFrame {
             return false;
         }
     }
-    
-    /**
-     * TODO:
-     *  The UI is perfect and complete
-     *  [-] Just try to get ui to be a little bit smaller and not take up whole width
-     *  ~
-     *  [-] Need to work on displaying keys from Application.java
-     *  [-] Also need to update keys in Application.java
-     *  [-] Also need to ensure user enters value from 1 to 255
-     *  [-] Need to update t0do.txt too with this new WModifyKeys.java instead of the others.
-     */
 }
