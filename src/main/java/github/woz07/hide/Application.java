@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class Application extends JFrame {
     // File structure
@@ -27,7 +28,8 @@ public class Application extends JFrame {
     private static final BCipher bCipher = new BCipher();
     
     // Keys
-    private byte[] keys = {0xA}; // for testing reasons this is set to 0xA
+//    private byte[] keys = new byte[255];
+    private ArrayList<Byte> keys = new ArrayList<>();
     
     private final JPanel container;
     private final GridBagConstraints gbc;
@@ -40,7 +42,6 @@ public class Application extends JFrame {
     private final JTextArea tOutput;
     private final JScrollPane sOutputScroll;
     public Application() {
-        
         // Setting up application
         setTitle("Hide");
         setPreferredSize(new Dimension(600, 400));
@@ -49,19 +50,13 @@ public class Application extends JFrame {
         // Setting up menus ~ m = menu, i = item
         // File menu
         JMenu mFile = new JMenu("File");
-        JMenuItem iAddKeys = new JMenuItem("Add key(s)");
-        iAddKeys.addActionListener(hAddKeys());
-        JMenuItem iRemoveKeys = new JMenuItem("Remove key(s)");
-        iRemoveKeys.addActionListener(hRemoveKeys());
-        JMenuItem iViewKeys = new JMenuItem("View key(s)");
-        iViewKeys.addActionListener(hViewKeys());
+        JMenuItem iModifyKeys = new JMenuItem("Modify key(s)");
+        iModifyKeys.addActionListener(hModifyKeys());
         JMenuItem iMode = new JMenuItem("Mode");
         iMode.addActionListener(hMode());
         JMenuItem iExit = new JMenuItem("Exit");
         iExit.addActionListener(hExit());
-        mFile.add(iAddKeys);
-        mFile.add(iRemoveKeys);
-        mFile.add(iViewKeys);
+        mFile.add(iModifyKeys);
         mFile.add(iMode);
         mFile.add(iExit);
         
@@ -152,6 +147,8 @@ public class Application extends JFrame {
                 count++;
             }
         }
+        
+        // Full set up
         if (count == keys.length) {
             // File is empty, so setup
             try {
@@ -170,6 +167,31 @@ public class Application extends JFrame {
         SwingUtilities.invokeLater(Application::new);
     }
     
+    // Getter for keys
+    public ArrayList<Byte> getKeys() {
+        return keys;
+    }
+    
+    // Useful methods for keys, used in WModifyKeys.java
+    // k = keys
+    
+    /**
+     * Add element to keys
+     * @param key The key to add
+     */
+    public void kAdd(byte key) {
+        keys.add(key);
+        System.out.println(keys);
+    }
+    
+    /**
+     * Remove element at index in keys
+     * @param index The index to remove element at
+     */
+    public void kRemove(int index) {
+        keys.remove(index);
+    }
+    
     // Listener for bSubmit
     // h = Handle
     
@@ -180,14 +202,20 @@ public class Application extends JFrame {
                 System.err.println("Keys mustn't be empty");
                 return;
             }
-            // Set keys always
+            // Set keys always before ciphering
             try {
-                bCipher.setKey(keys);
+                // Convert keys to byte[]
+                byte[] convert = new byte[keys.size()];
+                for (int i = 0; i < keys.size(); i++) {
+                    convert[i] = keys.get(i);
+                }
+                bCipher.setKey(convert);
             } catch (BCipherNullException | BCipherKeyException | BCipherSizeException ex) {
-                System.err.println("Unable to set keys.\nErr:" + ex.getMessage());
+                System.err.println("Unable to set keys.\nErr: " + ex.getMessage());
             }
             // Get text then convert and put it into output
             tOutput.setText(bCipher.cipher(tInput.getText()));
+            bCipher.flush();
         };
     }
     
@@ -196,21 +224,9 @@ public class Application extends JFrame {
     
     // File menu listeners
     
-    private ActionListener hAddKeys() {
+    private ActionListener hModifyKeys() {
         return e -> {
-            System.out.println("Working on...");
-        };
-    }
-    
-    private ActionListener hRemoveKeys() {
-        return e -> {
-            System.out.println("Working on...");
-        };
-    }
-    
-    private ActionListener hViewKeys() {
-        return e -> {
-            System.out.println("Working on...");
+            SwingUtilities.invokeLater(() -> new WModifyKeys(this));
         };
     }
     

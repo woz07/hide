@@ -1,12 +1,7 @@
 V1
 [y]: Allow for ctrl + v into tInput
 [y]: Allow for ctrl + c on tOutput
-[n]: Work on WAddKeys, get it up and running
-[n]: Work on Application::hAddKeys()
-[n]: Work on WRemoveKeys, get it up and running
-[n]: Work on Application::hRemoveKeys()
-[n]: Work on WViewKeys, get it up and running
-[n]: Work on Application::hViewKeys()
+[n]: Complete WModifyKeys
 [n]: Display errors using a popup rather than output
 [n]: Add a favicon
 [n]: Work on readme
