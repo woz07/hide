@@ -19,6 +19,7 @@ public class WModifyKeys extends JFrame {
     private final JPanel pButtons;
     private final JButton bAdd;
     private final JButton bDelete;
+    private final JButton bClear;
     public WModifyKeys(Application parent) {
         this.parent = parent;
         // Setting up
@@ -56,9 +57,22 @@ public class WModifyKeys extends JFrame {
             }
         });
         
+        // Clearing
+        bClear = new JButton("Clear key(s)");
+        bClear.addActionListener(e -> {
+            // Get confirmation
+            if (JOptionPane.showConfirmDialog(WModifyKeys.this, "Confirm clearing of key(s)?", "Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                // Clear keys
+                parent.kClear();
+                lModel.clear();
+            }
+        });
+
+        
         pButtons = new JPanel();
         pButtons.add(bAdd);
         pButtons.add(bDelete);
+        pButtons.add(bClear);
         
         // Load keys into lModel
         load();
@@ -81,7 +95,6 @@ public class WModifyKeys extends JFrame {
     private void load() {
         lModel.clear();
         for (byte key : parent.getKeys()) {
-            if (key == 0) { return; } // This means we have hit the end where the 0's are
             lModel.addElement(String.valueOf(key));
         }
     }

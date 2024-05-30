@@ -181,7 +181,6 @@ public class Application extends JFrame {
      */
     public void kAdd(byte key) {
         keys.add(key);
-        System.out.println(keys);
     }
     
     /**
@@ -190,6 +189,13 @@ public class Application extends JFrame {
      */
     public void kRemove(int index) {
         keys.remove(index);
+    }
+    
+    /**
+     * Function to clear keys
+     */
+    public void kClear() {
+        keys.clear();
     }
     
     // Listener for bSubmit
