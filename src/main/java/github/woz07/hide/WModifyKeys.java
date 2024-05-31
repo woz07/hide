@@ -9,7 +9,6 @@ public class WModifyKeys extends JFrame {
     private final Application parent;
     // l = List
     // jl = JList
-    private final List<String> lKeys;
     private final DefaultListModel<String> lModel;
     private final JList<String> jlKeys;
     
@@ -28,7 +27,6 @@ public class WModifyKeys extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         // Setting up components
-        lKeys = new ArrayList<>();
         lModel = new DefaultListModel<>();
         
         jlKeys = new JList<>(lModel);
