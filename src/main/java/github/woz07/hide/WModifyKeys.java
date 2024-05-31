@@ -2,8 +2,7 @@ package github.woz07.hide;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionListener;
 
 public class WModifyKeys extends JFrame {
     private final Application parent;
@@ -25,6 +24,20 @@ public class WModifyKeys extends JFrame {
         setTitle("Hide ~ Modify keys");
         setPreferredSize(new Dimension(300, 200));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        // Setting up menu
+        JMenu mManual = new JMenu("Manual");
+        JMenuItem iQuickAdd = new JMenuItem("Quick add");
+        iQuickAdd.addActionListener(hQuickAdd());
+        JMenuItem iQuickDelete = new JMenuItem("Quick delete");
+        iQuickDelete.addActionListener(hQuickDelete());
+        mManual.add(iQuickAdd);
+        mManual.add(iQuickDelete);
+        
+        // Finalizing menu
+        JMenuBar menu = new JMenuBar();
+        menu.add(mManual);
+        setJMenuBar(menu);
         
         // Setting up components
         lModel = new DefaultListModel<>();
@@ -84,6 +97,21 @@ public class WModifyKeys extends JFrame {
         setLocationRelativeTo(parent);
         setResizable(false);
         setVisible(true);
+    }
+    
+    // Listeners for JMenuItem(s)
+    // h = Handle
+    
+    private ActionListener hQuickAdd() {
+        return e -> {
+        
+        };
+    }
+    
+    private ActionListener hQuickDelete() {
+        return e -> {
+        
+        };
     }
     
     /**

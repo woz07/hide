@@ -7,7 +7,8 @@ V1
 [n]: Display errors using a popup rather than output
 [n]: Add a favicon
 [n]: Work on readme
-[n]: Aggressive testing
+[n]: Aggressive testing + commenting on code
+[n]: Create jar and convert to exe
 
 V2
 To decide...
