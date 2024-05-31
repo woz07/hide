@@ -67,7 +67,6 @@ public class WModifyKeys extends JFrame {
                 lModel.clear();
             }
         });
-
         
         pButtons = new JPanel();
         pButtons.add(bAdd);

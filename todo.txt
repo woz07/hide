@@ -3,6 +3,7 @@ V1
 [y]: Allow for ctrl + c on tOutput
 [y]: Complete WModifyKeys
 [n]: Add load feature to WModifyKeys which lets you load in keys like "12;32;45;21;12;54;23;" would be put into the list of keys
+[n]: Give the keys indexes and write important data like how many keys there are etc.
 [n]: Display errors using a popup rather than output
 [n]: Add a favicon
 [n]: Work on readme
