@@ -2,13 +2,13 @@ V1
 [y]: Allow for ctrl + v into tInput
 [y]: Allow for ctrl + c on tOutput
 [y]: Complete WModifyKeys
-[n]: Add load feature to WModifyKeys which lets you load in keys like "12;32;45;21;12;54;23;" would be put into the list of keys
-[n]: Give the keys indexes and write important data like how many keys there are etc.
+[y]: Give the keys indexes and write important data like how many keys there are etc.
+[y]: Allow for customization of adding keys and removing keys
 [n]: Display errors using a popup rather than output
 [n]: Add a favicon
-[n]: Work on readme
 [n]: Aggressive testing + commenting on code
 [n]: Create jar and convert to exe
+[n]: Work on readme
 
 V2
 To decide...

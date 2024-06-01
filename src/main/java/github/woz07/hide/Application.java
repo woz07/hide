@@ -232,9 +232,7 @@ public class Application extends JFrame {
     // File menu listeners
     
     private ActionListener hModifyKeys() {
-        return e -> {
-            SwingUtilities.invokeLater(() -> new WModifyKeys(this));
-        };
+        return e -> SwingUtilities.invokeLater(() -> new WModifyKeys(this));
     }
     
     private ActionListener hMode() {
