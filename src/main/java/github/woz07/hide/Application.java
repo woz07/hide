@@ -222,7 +222,7 @@ public class Application extends JFrame {
             }
             // Get text then convert and put it into output
             // Only do if keys isn't null
-            if (keys != null) {
+            if (keys != null && !keys.isEmpty()) {
                 tOutput.setText(bCipher.cipher(tInput.getText()));
             }
             bCipher.flush();
