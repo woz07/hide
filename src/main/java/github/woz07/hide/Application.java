@@ -221,7 +221,10 @@ public class Application extends JFrame {
                 System.err.println("Unable to set keys.\nErr: " + ex.getMessage());
             }
             // Get text then convert and put it into output
-            tOutput.setText(bCipher.cipher(tInput.getText()));
+            // Only do if keys isn't null
+            if (keys != null) {
+                tOutput.setText(bCipher.cipher(tInput.getText()));
+            }
             bCipher.flush();
         };
     }
