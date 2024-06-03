@@ -12,7 +12,7 @@ public class WError extends JFrame {
     // b = Button
     private final JButton bAccept;
     private final JButton bHelp;
-    public WError(Frame parent, String message) {
+    public WError(JFrame parent, String message) {
         setTitle("Hide ~ Error");
         setPreferredSize(new Dimension(320, 200));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
