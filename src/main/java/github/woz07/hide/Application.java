@@ -125,7 +125,7 @@ public class Application extends JFrame {
         // Setup fRoot
         if (!fRoot.exists()) {
             if (!fRoot.mkdir()) {
-//                new WError(this, "Unable to create folder called 'Hide' within %APPDATA%");
+                new WError(null, "[1.1] Unable to create folder called 'Hide' within %APPDATA%");
             }
         }
         
@@ -133,10 +133,13 @@ public class Application extends JFrame {
         if (!fConfig.exists()) {
             try {
                 if (!fConfig.createNewFile()) {
-                    System.err.println("Unable to create config.txt in: " + fRoot.getAbsolutePath());
+                    new WError(null, "[1.2] Unable to create config.txt in: " + fRoot.getAbsolutePath());
                 }
             } catch (IOException e) {
-                System.err.println("Unable to create config.txt in " + fRoot.getAbsolutePath() + "\nErr: " + e);
+                new WError(null,
+                        "[1.3] Unable to create config.txt in " + fRoot.getAbsolutePath() + ". " +
+                                "Error: " + e.getMessage()
+                );
             }
         }
         // Ensure fConfig isn't empty
@@ -205,7 +208,7 @@ public class Application extends JFrame {
         return e -> {
             // Check if keys isn't empty
             if (keys == null) {
-                System.err.println("Keys mustn't be empty");
+                new WError(null, "[2.1] Keys must not be empty");
                 return;
             }
             // Set keys always before ciphering
@@ -217,7 +220,7 @@ public class Application extends JFrame {
                 }
                 bCipher.setKey(convert);
             } catch (BCipherNullException | BCipherKeyException | BCipherSizeException ex) {
-                System.err.println("Unable to set keys.\nErr: " + ex.getMessage());
+                new WError(null, "[2.2] Unable to set keys. <br> Error: " + ex.getMessage());
             }
             // Get text then convert and put it into output
             // Only do if keys isn't null

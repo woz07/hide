@@ -18,7 +18,7 @@ public class WError extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         // Setting up components
-        lError = new JLabel(message);
+        lError = new JLabel("<html>" + message + "</html>", SwingConstants.CENTER);
         
         bAccept = new JButton("Okay");
         bAccept.addActionListener(e -> dispose());

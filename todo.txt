@@ -5,10 +5,11 @@ V1
 [y]: Give the keys indexes and write important data like how many keys there are etc.
 [y]: Allow for customization of adding keys and removing keys
 [n]: Display errors using a popup rather than output
+[y]: Give all errors specific numbers
 [n]: Add a favicon
 [n]: Aggressive testing + commenting on code
 [n]: Create jar and convert to exe
-[n]: Work on readme
+[n]: Work on readme + comment on each error code
 
 V2
 To decide...
