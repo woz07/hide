@@ -10,8 +10,13 @@ import github.woz07.exceptions.BCipherSizeException;
 import github.woz07.liteconfig.Configuration;
 
 import javax.swing.*;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -34,12 +39,15 @@ public class Application extends JFrame {
     private final JPanel container;
     private final GridBagConstraints gbc;
     // t = TextArea
+    // u = Undo
     // s = ScrollPane
     // l = Label
     private final JTextArea tInput;
+    private final UndoManager uInputManager;
     private final JScrollPane sInputScroll;
     private final JButton bSubmit;
     private final JTextArea tOutput;
+    private final UndoManager uOutputManager;
     private final JScrollPane sOutputScroll;
     public Application() {
         // Setting up application
@@ -89,10 +97,42 @@ public class Application extends JFrame {
         // Input
         tInput = new JTextArea();
         tInput.setText("Enter text to cipher...");
+        tInput.setLineWrap(true);
         tInput.setRows(10);
         tInput.setColumns(40);
         sInputScroll = new JScrollPane(tInput);
         sInputScroll.setPreferredSize(new Dimension(500, 135));
+        
+        uInputManager = new UndoManager();
+        tInput.getDocument().addUndoableEditListener(e -> uInputManager.addEdit(e.getEdit()));
+        // a = Action
+        Action aInputAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (uInputManager.canUndo()) {
+                        uInputManager.undo();
+                    }
+                } catch (CannotUndoException ignore) {}
+            }
+        };
+        Action aInputRedo = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (uInputManager.canRedo()) {
+                        uInputManager.redo();
+                    }
+                } catch (CannotRedoException ignore) {}
+            }
+        };
+        // Bind actions to tInput
+        // Ctrl + Z
+        tInput.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK), "Undo");
+        tInput.getActionMap().put("Undo", aInputAction);
+        // Ctrl + Shift + Z
+        tInput.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK), "Redo");
+        tInput.getActionMap().put("Redo", aInputRedo);
         
         // Submit
         bSubmit = new JButton("Cipher");
@@ -101,10 +141,42 @@ public class Application extends JFrame {
         // Output
         tOutput = new JTextArea();
         tOutput.setText("Ciphered text appears here...");
+        tOutput.setLineWrap(true);
         tOutput.setRows(10);
         tOutput.setColumns(40);
         sOutputScroll = new JScrollPane(tOutput);
         sOutputScroll.setPreferredSize(new Dimension(500, 135));
+    
+        uOutputManager = new UndoManager();
+        tInput.getDocument().addUndoableEditListener(e -> uOutputManager.addEdit(e.getEdit()));
+        // a = Action
+        Action aOutputUndo = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (uOutputManager.canUndo()) {
+                        uOutputManager.undo();
+                    }
+                } catch (CannotUndoException ignore) {}
+            }
+        };
+        Action aOutputRedo = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (uOutputManager.canRedo()) {
+                        uOutputManager.redo();
+                    }
+                } catch (CannotRedoException ignore) {}
+            }
+        };
+        // Bind actions to tOutput
+        // Ctrl + Z
+        tOutput.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK), "Undo");
+        tOutput.getActionMap().put("Undo", aOutputUndo);
+        // Ctrl + Shift + Z
+        tOutput.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK), "Redo");
+        tOutput.getActionMap().put("Redo", aOutputRedo);
         
         // Finalizing components
         container.add(sInputScroll, gbc);
