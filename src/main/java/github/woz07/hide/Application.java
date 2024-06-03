@@ -126,6 +126,7 @@ public class Application extends JFrame {
         if (!fRoot.exists()) {
             if (!fRoot.mkdir()) {
                 System.err.println("Unable to create folder called 'Hide' within %APPDATA%");
+                
             }
         }
         

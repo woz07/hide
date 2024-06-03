@@ -12,13 +12,13 @@ public class WError extends JFrame {
     // b = Button
     private final JButton bAccept;
     private final JButton bHelp;
-    public WError(Frame parent, Exception exception) {
+    public WError(Frame parent, String message) {
         setTitle("Hide ~ Error");
         setPreferredSize(new Dimension(320, 200));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         // Setting up components
-        lError = new JLabel(exception.getMessage());
+        lError = new JLabel(message);
         
         bAccept = new JButton("Okay");
         bAccept.addActionListener(e -> dispose());
@@ -36,6 +36,17 @@ public class WError extends JFrame {
         });
         
         // Finalizing components
+        // p = Panel
+        JPanel pTop = new JPanel(new BorderLayout());
+        pTop.add(lError, BorderLayout.CENTER);
+        
+        JPanel pBottom = new JPanel();
+        pBottom.add(bAccept);
+        pBottom.add(bHelp);
+        
+        setLayout(new BorderLayout());
+        add(pTop, BorderLayout.CENTER);
+        add(pBottom, BorderLayout.SOUTH);
         
         pack();
         setLocationRelativeTo(parent);
