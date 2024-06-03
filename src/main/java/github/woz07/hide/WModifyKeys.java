@@ -2,7 +2,6 @@ package github.woz07.hide;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class WModifyKeys extends JFrame {
     private final Application parent;
