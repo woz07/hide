@@ -338,43 +338,46 @@ public class Application extends JFrame {
     // Help menu listeners
     
     private ActionListener hAbout() {
+        String link = "https://www.github.com/woz07/hide#About";
         return e -> {
             try {
-                URI uri = new URI("https://www.github.com/woz07/hide#About");
+                URI uri = new URI(link);
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                u.printStackTrace();
+                new WError(this, "[3.1] Unable to open link in browser: " + link);
             }
         };
     }
     
     private ActionListener hHelp() {
+        String link = "https://www.github.com/woz07/hide#Help";
         return e -> {
             try {
-                URI uri = new URI("https://www.github.com/woz07/hide#Help");
+                URI uri = new URI(link);
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                u.printStackTrace();
+                new WError(this, "[3.1] Unable to open link in browser: " + link);
             }
         };
     }
     
     private ActionListener hIssue() {
+        String link = "https://www.github.com/woz07/hide/issues";
         return e -> {
             try {
-                URI uri = new URI("https://www.github.com/woz07/hide/issues");
+                URI uri = new URI(link);
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                u.printStackTrace();
+                new WError(this, "[3.1] Unable to open link in browser: " + link);
             }
         };
     }
