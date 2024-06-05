@@ -16,6 +16,9 @@ public class WError extends JFrame {
         setTitle("Hide ~ Error");
         setPreferredSize(new Dimension(320, 200));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    
+        // Setting up favicon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/favicon.png")));
         
         // Setting up components
         lError = new JLabel("<html>" + message + "</html>", SwingConstants.CENTER);

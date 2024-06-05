@@ -18,6 +18,9 @@ public class WModifyKeys extends JFrame {
         setTitle("Hide ~ Modify keys");
         setPreferredSize(new Dimension(320, 200));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    
+        // Setting up favicon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/favicon.png")));
         
         lModel = new DefaultListModel<>();
         jlKeys = new JList<>(lModel);

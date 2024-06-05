@@ -6,7 +6,7 @@ V1
 [y]: Allow for customization of adding keys and removing keys
 [n]: Display errors using a popup rather than output
 [y]: Give all errors specific numbers
-[n]: Add a favicon
+[y]: Add a favicon
 [n]: Aggressive testing + commenting on code
 [n]: Create jar and convert to exe
 [n]: Work on readme + comment on each error code

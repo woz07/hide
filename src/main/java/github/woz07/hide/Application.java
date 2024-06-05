@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Application extends JFrame {
     // File structure
@@ -54,6 +55,10 @@ public class Application extends JFrame {
         setTitle("Hide");
         setPreferredSize(new Dimension(600, 400));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        // Setting up favicon
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/favicon.png")));
+
         
         // Setting up menus ~ m = menu, i = item
         // File menu
