@@ -70,7 +70,7 @@ public class WModifyKeys extends JFrame {
                     parent.kAdd(Byte.parseByte(input));
                     load();
                 } else {
-                    new WError(this, "[4.3] Invalid key.");
+                    JOptionPane.showMessageDialog(this, "[4.3] Invalid key.");
                 }
             }
         });
@@ -114,7 +114,7 @@ public class WModifyKeys extends JFrame {
                         new WError(this, "[5.2] Key not found.");
                     }
                 } else {
-                    new WError(this, "[5.3] Invalid key.");
+                    JOptionPane.showMessageDialog(this, "[5.3] Invalid key.");
                 }
             }
         });

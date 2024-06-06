@@ -9,9 +9,4 @@ V1
 [y]: Add a favicon
 [y]: Aggressive testing + commenting on code + clean up
 [y]: Create jar and convert to exe
-[n]: Work on readme + comment on each error code
-
-V2
-To decide...
-Cool ideas:
-- A feature that lets you convert from an input file to an output file
+[y]: Work on readme + comment on each error code

@@ -227,7 +227,7 @@ public class Application extends JFrame {
                 }
             } catch (IOException e) {
                 new WError(null,
-                        "[1.3] Unable to create config.txt in " + fRoot.getAbsolutePath() + ". " +
+                        "[1.3] Unable to create config.txt in " + fRoot.getAbsolutePath() + ". \n" +
                                 "Error: " + e.getMessage()
                 );
             }
