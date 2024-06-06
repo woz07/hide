@@ -40,6 +40,8 @@ public class Application extends JFrame {
     private static final Configuration config = new Configuration(fConfig);
     private static final BCipher bCipher = new BCipher();
     
+    private final String version = "1.0";
+    
     // Keys
     private ArrayList<Byte> keys = new ArrayList<>();
     
@@ -87,9 +89,12 @@ public class Application extends JFrame {
         iHelp.addActionListener(hHelp());
         JMenuItem iIssue = new JMenuItem("Found an issue?");
         iIssue.addActionListener(hIssue());
+        JMenuItem iVersion = new JMenuItem("Version: " + version);
+        iVersion.setEnabled(false);
         mHelp.add(iAbout);
         mHelp.add(iHelp);
         mHelp.add(iIssue);
+        mHelp.add(iVersion);
         
         // Finalizing menu
         JMenuBar menu = new JMenuBar();

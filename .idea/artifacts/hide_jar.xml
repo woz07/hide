@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hide:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/hide_jar</output-path>
+    <root id="archive" name="hide.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="hide" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/liteconfig-1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/bcipher.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.4.1/flatlaf-3.4.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
