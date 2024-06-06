@@ -8,7 +8,7 @@ V1
 [y]: Give all errors specific numbers
 [y]: Add a favicon
 [y]: Aggressive testing + commenting on code + clean up
-[n]: Create jar and convert to exe
+[y]: Create jar and convert to exe
 [n]: Work on readme + comment on each error code
 
 V2
