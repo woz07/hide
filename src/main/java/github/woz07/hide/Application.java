@@ -22,10 +22,17 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Objects;
+
+/**
+ * Application.java
+ * This is the entry class which is also the main GUI class.
+ *
+ * @author woz07
+ */
 
 public class Application extends JFrame {
     // File structure
+    // f = File
     private static final File fRoot = new File(System.getenv("APPDATA"), "Hide");
     private static final File fConfig = new File(fRoot, "config.txt");
     
@@ -34,7 +41,6 @@ public class Application extends JFrame {
     private static final BCipher bCipher = new BCipher();
     
     // Keys
-//    private byte[] keys = new byte[255];
     private ArrayList<Byte> keys = new ArrayList<>();
     
     private final JPanel container;
@@ -42,7 +48,6 @@ public class Application extends JFrame {
     // t = TextArea
     // u = Undo
     // s = ScrollPane
-    // l = Label
     private final JTextArea tInput;
     private final UndoManager uInputManager;
     private final JScrollPane sInputScroll;
@@ -50,6 +55,7 @@ public class Application extends JFrame {
     private final JTextArea tOutput;
     private final UndoManager uOutputManager;
     private final JScrollPane sOutputScroll;
+    
     public Application() {
         // Setting up application
         setTitle("Hide");
@@ -108,6 +114,7 @@ public class Application extends JFrame {
         sInputScroll = new JScrollPane(tInput);
         sInputScroll.setPreferredSize(new Dimension(500, 135));
         
+        // u = Undo
         uInputManager = new UndoManager();
         tInput.getDocument().addUndoableEditListener(e -> uInputManager.addEdit(e.getEdit()));
         // a = Action
@@ -152,6 +159,7 @@ public class Application extends JFrame {
         sOutputScroll = new JScrollPane(tOutput);
         sOutputScroll.setPreferredSize(new Dimension(500, 135));
     
+        // u = Undo
         uOutputManager = new UndoManager();
         tInput.getDocument().addUndoableEditListener(e -> uOutputManager.addEdit(e.getEdit()));
         // a = Action
@@ -219,6 +227,7 @@ public class Application extends JFrame {
                 );
             }
         }
+        
         // Ensure fConfig isn't empty
         String[] keys = {"MODE"};
         int count = 0;
@@ -228,7 +237,7 @@ public class Application extends JFrame {
             }
         }
         
-        // Full set up
+        // Full set up if it's all empty/ first time set up
         if (count == keys.length) {
             // File is empty, so setup
             try {
@@ -285,7 +294,7 @@ public class Application extends JFrame {
         return e -> {
             // Check if keys isn't empty
             if (keys == null) {
-                new WError(null, "[2.1] Keys must not be empty");
+                new WError(this, "[2.1] Keys must not be empty");
                 return;
             }
             // Set keys always before ciphering
@@ -297,7 +306,7 @@ public class Application extends JFrame {
                 }
                 bCipher.setKey(convert);
             } catch (BCipherNullException | BCipherKeyException | BCipherSizeException ex) {
-                new WError(null, "[2.2] Unable to set keys. <br> Error: " + ex.getMessage());
+                new WError(this, "[2.2] Unable to set keys. <br> Error: " + ex.getMessage());
             }
             // Get text then convert and put it into output
             // Only do if keys isn't null
@@ -352,7 +361,7 @@ public class Application extends JFrame {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                new WError(this, "[3.1] Unable to open link in browser: " + link);
+                new WError(this, "[3.1] Unable to open link in browser: <br>" + link);
             }
         };
     }
@@ -367,7 +376,7 @@ public class Application extends JFrame {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                new WError(this, "[3.1] Unable to open link in browser: " + link);
+                new WError(this, "[3.1] Unable to open link in browser: <br>" + link);
             }
         };
     }
@@ -382,7 +391,7 @@ public class Application extends JFrame {
                     desktop.browse(uri);
                 }
             } catch (URISyntaxException | IOException u) {
-                new WError(this, "[3.1] Unable to open link in browser: " + link);
+                new WError(this, "[3.1] Unable to open link in browser: <br>" + link);
             }
         };
     }

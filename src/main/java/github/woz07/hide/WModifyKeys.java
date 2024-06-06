@@ -3,10 +3,23 @@ package github.woz07.hide;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * WModifyKeys.java
+ * This is the class which displays the GUI for the keys,
+ * it allows the user to add and delete keys.
+ *
+ * @author woz07
+ */
+
 public class WModifyKeys extends JFrame {
     private final Application parent;
+    // l = List
+    // jl = JList
     private final DefaultListModel<String> lModel;
     private final JList<String> jlKeys;
+    
+    // p = Panel
+    // b = Button
     private final JScrollPane pane;
     private final JPanel pButtons;
     private final JButton bAdd;
@@ -38,7 +51,7 @@ public class WModifyKeys extends JFrame {
                         int times = Integer.parseInt(parts[0]);
                         byte key = Byte.parseByte(parts[1]);
                         if (times + parent.getKeys().size() > 255) {
-                            JOptionPane.showMessageDialog(WModifyKeys.this, "Cannot add more than 255 keys in total.");
+                            new WError(this, "[4.1] Cannot add more than 255 keys in total.");
                             return;
                         }
                         for (int i = 0; i < times; i++) {
@@ -46,17 +59,18 @@ public class WModifyKeys extends JFrame {
                         }
                         load();
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(WModifyKeys.this, "Invalid format. Use 'n key' to add multiple keys.");
+                        new WError(this, "[4.2] Invalid format. <br> Use 'n key' to add multiple keys.");
                     }
                 } else if (valid(input)) {
                     if (parent.getKeys().size() >= 255) {
                         JOptionPane.showMessageDialog(WModifyKeys.this, "Cannot add more than 255 keys in total.");
+                        new WError(this, "[4.1] Cannot add more than 255 keys in total");
                         return;
                     }
                     parent.kAdd(Byte.parseByte(input));
                     load();
                 } else {
-                    JOptionPane.showMessageDialog(WModifyKeys.this, "Invalid key.");
+                    new WError(this, "[4.3] Invalid key.");
                 }
             }
         });
@@ -89,7 +103,7 @@ public class WModifyKeys extends JFrame {
                         }
                         load();
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(WModifyKeys.this, "Invalid format. Use 'n key' or '* key' to delete multiple keys.");
+                        new WError(this, "[5.1] Invalid format. <br> Use 'n key' or '* key' to delete multiple keys.");
                     }
                 } else if (valid(input)) {
                     int index = findKeyIndex(Byte.parseByte(input));
@@ -97,10 +111,10 @@ public class WModifyKeys extends JFrame {
                         parent.kRemove(index);
                         load();
                     } else {
-                        JOptionPane.showMessageDialog(WModifyKeys.this, "Key not found.");
+                        new WError(this, "[5.2] Key not found.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(WModifyKeys.this, "Invalid key.");
+                    new WError(this, "[5.3] Invalid key.");
                 }
             }
         });
@@ -122,16 +136,19 @@ public class WModifyKeys extends JFrame {
         // Load keys into lModel
         load();
         
+        // Add components
         setLayout(new BorderLayout());
         add(pane, BorderLayout.CENTER);
         add(pButtons, BorderLayout.SOUTH);
         
+        // Finalizing
         pack();
         setLocationRelativeTo(parent);
         setResizable(false);
         setVisible(true);
     }
     
+    // Function to load data into the lModel, aka the JList
     private void load() {
         lModel.clear();
         for (int i = 0; i < parent.getKeys().size(); i++) {
@@ -140,6 +157,11 @@ public class WModifyKeys extends JFrame {
         }
     }
     
+    /**
+     * This function checks if a string is a valid byte
+     * @param input The string to check
+     * @return True if the string is a valid byte else false
+     */
     private boolean valid(String input) {
         try {
             byte value = Byte.parseByte(input);
@@ -149,6 +171,12 @@ public class WModifyKeys extends JFrame {
         }
     }
     
+    /**
+     * This function finds a keys index, if there are multiple
+     * keys then it will find the first one equal to key
+     * @param key The key to find index for
+     * @return The index
+     */
     private int findKeyIndex(byte key) {
         for (int i = 0; i < parent.getKeys().size(); i++) {
             if (parent.getKeys().get(i) == key) {
