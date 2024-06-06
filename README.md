@@ -32,6 +32,8 @@ then you need pick a version, and then you need to install whichever executable 
 or the `.exe`, if you are  on Windows then I recommend the `.exe`, but it's all up to you whether you want 
 to install the `.exe`.
 
+> Note: Only install the executable via the `releases`, don't install the executable(s) in the source code
+
 ### Using
 Once you have installed it, you can then run the app. Once you are running the app, before you can even cipher 
 any text, you must add some keys which are vital for the ciphering process. These keys are required and the 
