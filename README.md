@@ -1,7 +1,7 @@
 # hide
 An application to cipher texts
 
-> Note: Hide isn't a 100% secure application, this is because the method of ciphering isn't the more best.
+> Note: Hide isn't a 100% secure application, this is because the method of ciphering isn't the best.
 > So if you're looking for an app that offers high security then hide would not be it.
 > <br>
 > <br>
